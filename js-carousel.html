@@ -6,39 +6,88 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JS Carousel</title>
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Amatic+SC:400,700');
         body {
+            font-family: 'Amatic SC', cursive;
             padding: 0;
             margin: 0;
+        }
+        h1 {
+            font-size: 4em;
+        }
+        p {
+            font-size: 2em;
+        }
+        #carousel {
+            height: 650px;
+        }
+        #carouselContent {
+            padding: 300px 55px 0;
         }
         .img {
             color: #fff;
             background: url(./images/img-1.jpg) no-repeat center center;
             background-size: cover;
             min-height: 650px;
+            -webkit-transition: background-image 0.5s ease-in;
+            transition: background-image 0.5s ease-in;
+        }
+        .btn_wrapper {
+            text-align: center;
+            margin: 10px 0 30px 0;
+        }
+        .btn_wrapper a {
+            display: inline-block;
+            border-radius: 3px;
+            padding: 15px 30px;
+            background-color: #000000;
+            color: #fff;
+            text-align: center;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
     <div id="carousel">
-        <div class="img"></div>
-        <div class="btn"><a href="#" id="previous">Prev</a></div>
-        <div class="btn"><a href="#" id="next">Next</a></div>
+        <div id="carouselImg" class="img">
+            <div id="carouselContent">
+                <h1>Sick Image</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, nesciunt! Delectus, odit consequatur! Quibusdam recusandae minima, adipisci fugiat omnis quos nostrum nemo architecto vitae possimus illum incidunt, facere officia molestias!</p>
+                <div class="btn_wrapper">
+                    <a href="#" id="previous" class="btn">Prev</a>
+                    <a href="#" id="next" class="btn">Next</a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
 <script>
-    const previous = document.getElementById('next');
-    var imgArray = ["./images/img-1.jpg", "./images/img-3.jpg", "./images/img-4.jpg", "./images/img-2.jpg"];
+    const next = document.getElementById('next');
+    const previous = document.getElementById('previous');
+    var imgArray = ["img-1.jpg", "img-2.jpg", "img-3.jpg", "img-4.jpg"];
+    var carouselSlide = document.getElementById('carouselImg');
     //console.log(imgArray);
-    previous.addEventListener('click', function() {
+
+    // Next 
+    next.addEventListener('click', function() {
         let carouselImg = imgArray.shift();
+        console.log(carouselImg);
         imgArray.push(carouselImg);
-        console.log(imgArray);
+        let imagePrefix = imgArray[0];
+        let urlString = 'url(./images/' + imagePrefix;
+        carouselSlide.style.backgroundImage = urlString;
     });
     
+    // Previous
+    previous.addEventListener('click', function() {
+        let carouselImg = imgArray.pop();
+        console.log(carouselImg);
+        imgArray.unshift(carouselImg);
+        let imagePrefix = imgArray[0];
+        let urlString = 'url(./images/' + imagePrefix;
+        carouselSlide.style.backgroundImage = urlString;
+    });
 </script>
-
-<!-- Carousel
-    - 
-
--->
