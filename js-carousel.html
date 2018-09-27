@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JS Carousel</title>
     <style>
+        @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
         @import url('https://fonts.googleapis.com/css?family=Amatic+SC:400,700');
         body {
             font-family: 'Amatic SC', cursive;
@@ -22,7 +23,7 @@
             height: 650px;
         }
         #carouselContent {
-            padding: 300px 55px 0;
+            padding: 285px 55px 0;
         }
         .img {
             color: #fff;
@@ -46,6 +47,11 @@
             color: #ffffff;
             text-decoration: none;
             font-size: 20px;
+            font-weight: bold;
+        }
+        .btn .fa {
+            font-size: 15px;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -56,8 +62,8 @@
                 <h1>Sick Image</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, nesciunt! Delectus, odit consequatur! Quibusdam recusandae minima, adipisci fugiat omnis quos nostrum nemo architecto vitae possimus illum incidunt, facere officia molestias!</p>
                 <div class="btn_wrapper">
-                    <a href="#" id="previous" class="btn">Prev</a>
-                    <a href="#" id="next" class="btn">Next</a>
+                    <a href="#" id="previous" class="btn"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp; Prev</a>
+                    <a href="#" id="next" class="btn">Next &nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -72,7 +78,7 @@
     //console.log(imgArray);
 
     // Next 
-    next.addEventListener('click', function() {
+    next.addEventListener('click', () => {
         let carouselImg = imgArray.shift();
         console.log(carouselImg);
         imgArray.push(carouselImg);
@@ -82,7 +88,7 @@
     });
     
     // Previous
-    previous.addEventListener('click', function() {
+    previous.addEventListener('click', () => {
         let carouselImg = imgArray.pop();
         console.log(carouselImg);
         imgArray.unshift(carouselImg);
@@ -90,4 +96,14 @@
         let urlString = 'url(./images/' + imagePrefix;
         carouselSlide.style.backgroundImage = urlString;
     });
+
+    const carouselAuto = () => {
+        let carouselImg = imgArray.shift();
+        console.log(carouselImg);
+        imgArray.push(carouselImg);
+        let imagePrefix = imgArray[0];
+        let urlString = 'url(./images/' + imagePrefix;
+        carouselSlide.style.backgroundImage = urlString;
+    }
+    setInterval(carouselAuto, 5000);
 </script>
