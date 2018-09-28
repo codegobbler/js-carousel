@@ -77,6 +77,23 @@
     var carouselSlide = document.getElementById('carouselImg');
     //console.log(imgArray);
 
+    var Slide = setInterval(carouselAuto, 3000);
+
+    function carouselAuto() {
+        let carouselImg = imgArray.shift();
+        console.log(carouselImg);
+        imgArray.push(carouselImg);
+        let imagePrefix = imgArray[0];
+        let urlString = 'url(./images/' + imagePrefix;
+        carouselSlide.style.backgroundImage = urlString;
+    }
+
+    var stopSlide = () => {
+        clearInterval(Slide);
+    }
+    
+
+
     // Next 
     next.addEventListener('click', () => {
         let carouselImg = imgArray.shift();
@@ -85,6 +102,7 @@
         let imagePrefix = imgArray[0];
         let urlString = 'url(./images/' + imagePrefix;
         carouselSlide.style.backgroundImage = urlString;
+        stopSlide();
     });
     
     // Previous
@@ -95,15 +113,8 @@
         let imagePrefix = imgArray[0];
         let urlString = 'url(./images/' + imagePrefix;
         carouselSlide.style.backgroundImage = urlString;
+        clearInterval(carouselSlide);
     });
 
-    const carouselAuto = () => {
-        let carouselImg = imgArray.shift();
-        console.log(carouselImg);
-        imgArray.push(carouselImg);
-        let imagePrefix = imgArray[0];
-        let urlString = 'url(./images/' + imagePrefix;
-        carouselSlide.style.backgroundImage = urlString;
-    }
-    setInterval(carouselAuto, 5000);
+    
 </script>
